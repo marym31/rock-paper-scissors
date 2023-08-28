@@ -23,8 +23,7 @@ function getComputerChoice(){
 function playRound(playerSelection, computerSelection){
     if(playerSelection === computerSelection){
         return "it's a draw!!";
-    }
-    while(playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
+    } else if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors"){
         playerSelection = prompt("Inserire una scelta valida");
     }
     switch(playerSelection==="rock"){
@@ -57,7 +56,6 @@ function playRound(playerSelection, computerSelection){
         default:
         break;
     }
-    
 } 
 function game(){
     for (i=1; i <= 5; i++){
