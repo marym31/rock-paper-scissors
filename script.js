@@ -1,7 +1,7 @@
 let playerSelection;
 let computerSelection;
 
-game();
+game()
 
 function getComputerChoice(){
 
@@ -28,7 +28,7 @@ function playRound(playerSelection, computerSelection){
     }
     switch(playerSelection==="rock"){
         case computerSelection ==="paper":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            return `You lose! ${computerSelection} beats ${playerSelection}`;
         case computerSelection ==="scissors":
             return `You win! ${playerSelection} beats ${computerSelection}`;
         default:
@@ -36,7 +36,7 @@ function playRound(playerSelection, computerSelection){
     } 
     switch(playerSelection==="paper"){
         case computerSelection ==="scissors":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            return `You lose! ${computerSelection} beats ${playerSelection}`;
         case computerSelection ==="rock":
             return `You win! ${playerSelection} beats ${computerSelection}`;
         default:
@@ -44,18 +44,32 @@ function playRound(playerSelection, computerSelection){
     } 
     switch(playerSelection==="scissors"){
         case computerSelection ==="paper":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
+            return `You lose! ${computerSelection} beats ${playerSelection}`;
         case computerSelection ==="rock":
             return `You win! ${playerSelection} beats ${computerSelection}`;
         default:
         break;
     }
-} 
+}
+
+const div = document.querySelector('#result');
+div.textContent = 'Risultati: '
+let result = document.createElement('p')
+
+
 function game(){
-    for (i=1; i <= 5; i++){
-        playerSelection = (prompt("Inserisci la tua scelta")).toLowerCase();
-        computerSelection = getComputerChoice();
-        alert(playRound(playerSelection, computerSelection));
+
+    const buttons = document.querySelectorAll('button');
+   
+    buttons.forEach((button)=> {
+        button.addEventListener('click', function(e){
+            
+            result.innerHTML = playRound(e.target.id, getComputerChoice()) ;
+            
+            console.log(result)
         
-    }
+            div.appendChild(result)
+        });
+
+    })
 }
