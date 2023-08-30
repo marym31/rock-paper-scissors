@@ -29,30 +29,24 @@ function playRound(playerSelection, computerSelection){
     switch(playerSelection==="rock"){
         case computerSelection ==="paper":
             return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
         case computerSelection ==="scissors":
             return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
         default:
         break;
     } 
     switch(playerSelection==="paper"){
         case computerSelection ==="scissors":
             return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
         case computerSelection ==="rock":
             return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
         default:
         break;
     } 
     switch(playerSelection==="scissors"){
         case computerSelection ==="paper":
             return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
         case computerSelection ==="rock":
             return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
         default:
         break;
     }
