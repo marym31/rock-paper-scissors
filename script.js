@@ -1,7 +1,10 @@
 let playerSelection;
 let computerSelection;
+const buttons = document.querySelectorAll('button');
+let scorePlayer = parseInt(document.getElementById('scorePlayer').value, 10)
+let scoreComputer = parseInt(document.getElementById('scoreComputer').value, 10)
 
-game();
+game()
 
 function getComputerChoice(){
 
@@ -21,47 +24,58 @@ function getComputerChoice(){
 
 // creo una funzione che fa partire il round
 function playRound(playerSelection, computerSelection){
+    
     if(playerSelection === computerSelection){
-        return "it's a draw!!";
-    } else if (playerSelection != "rock" && playerSelection && "paper" && playerSelection != "scissors"){
-        playerSelection = prompt("Inserire una scelta valida");
+        return "It's a tie!";
+    } else if((playerSelection == 'rock' && computerSelection == 'scissors') ||
+       (playerSelection == 'scissors' && computerSelection == 'paper') ||
+       (playerSelection == 'paper' && computerSelection == 'rock')){
+            return `You win! ${playerSelection} beats ${computerSelection}`;
+    } else {
+            return `You lose! ${computerSelection} beats ${playerSelection}`;
+
     }
-    switch(playerSelection==="rock"){
-        case computerSelection ==="paper":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
-        case computerSelection ==="scissors":
-            return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
-        default:
-        break;
-    } 
-    switch(playerSelection==="paper"){
-        case computerSelection ==="scissors":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
-        case computerSelection ==="rock":
-            return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
-        default:
-        break;
-    } 
-    switch(playerSelection==="scissors"){
-        case computerSelection ==="paper":
-            return `You Lose! ${computerSelection} beats ${playerSelection}`;
-            break;
-        case computerSelection ==="rock":
-            return `You win! ${playerSelection} beats ${computerSelection}`;
-            break;
-        default:
-        break;
-    }
-} 
+}
+
+const div = document.querySelector('#result');
+div.textContent = 'Risultati: '
+let result = document.createElement('p')
+
+
 function game(){
-    for (i=1; i <= 5; i++){
-        playerSelection = (prompt("Inserisci la tua scelta")).toLowerCase();
-        computerSelection = getComputerChoice();
-        alert(playRound(playerSelection, computerSelection));
+    buttons.forEach((button)=> {
+        button.addEventListener('click', function(e){
+
+            resultString = playRound(e.target.id, getComputerChoice()) ;
+            result.innerHTML = resultString ;
         
-    }
+            if(resultString.search('win') > 0){
+                scorePlayer++
+                document.getElementById('scorePlayer').value = scorePlayer;
+            
+            }else if (resultString.search('lose') > 0){
+                scoreComputer++
+                document.getElementById('scoreComputer').value = scoreComputer;
+            } 
+            div.appendChild(result)
+        if (scorePlayer === 5){
+            alert("Congratulations, you are the winner");
+            disabledButtons();
+
+        } else if (scoreComputer === 5){
+            alert("I am sorry! You lost");
+            disabledButtons();
+        }
+        });
+
+        
+    })
+
+
+}
+
+function disabledButtons() {
+    buttons.forEach(button => {
+        button.disabled = true
+    })
 }
